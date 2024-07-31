@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5772573221676318002}
   - component: {fileID: 7056203368637032954}
   - component: {fileID: 2363911740334227314}
+  - component: {fileID: 4084121320805097369}
+  - component: {fileID: 1988607045995526814}
   m_Layer: 0
   m_Name: Collectible_Rock
   m_TagString: Untagged
@@ -105,3 +107,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4084121320805097369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8969513937188286683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c89832227c9ec048b3f3feb7a7c8007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableType: 0
+--- !u!114 &1988607045995526814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8969513937188286683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de1d6be0b53b1c942ae03fbb5012161c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Item: 1

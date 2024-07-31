@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -42,8 +43,31 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            if (hit.collider != null) Debug.Log(hit.collider.gameObject);
+            if (hit.collider == null || hit.collider.gameObject.GetComponent<Interactable>() == null) return;
 
+            var interactionTarget = hit.collider.gameObject.GetComponent<Interactable>();
+            switch (interactionTarget.interactableType) 
+            {
+                case InteractableType.PICKUP:
+                    var item = interactionTarget.GetComponent<Pickup>().Item;
+                    if (inventory.ContainsKey(item)) inventory[item]++;
+                    else inventory.Add(item, 1);
+                    Debug.Log(item + inventory[item]);
+                break;
+
+                case InteractableType.TALK:
+                break;
+
+                case InteractableType.DELIVER:
+                    var deliveryTarget = interactionTarget.GetComponent<DeliveryTarget>();
+                    if (inventory.ContainsKey(deliveryTarget.DeliveryItem))
+                    {
+                        deliveryTarget.DeliveryCounter += inventory[deliveryTarget.DeliveryItem];
+                        inventory[deliveryTarget.DeliveryItem] = 0;
+                    }
+                break;
+            }
+            interactionTarget.DoInteraction(this);
         }
     }
 
@@ -59,6 +83,8 @@ public class PlayerController : MonoBehaviour
     // Serialized Fields
     [SerializeField] Camera camera;
     [SerializeField] float moveSpeed;
+
+    Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
 
     private void Awake()
     {
