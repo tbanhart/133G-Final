@@ -52,10 +52,13 @@ public class PlayerController : MonoBehaviour
                     var item = interactionTarget.GetComponent<Pickup>().Item;
                     if (inventory.ContainsKey(item)) inventory[item]++;
                     else inventory.Add(item, 1);
+                    UpdateItemAmounts(item, inventory[item]);
                     Debug.Log(item + inventory[item]);
                 break;
 
                 case InteractableType.TALK:
+                    var npcTarget = interactionTarget.GetComponent<NPC>();
+                    DisplayText(interactionTarget.gameObject, npcTarget.DialogueText);
                 break;
 
                 case InteractableType.DELIVER:
@@ -65,6 +68,7 @@ public class PlayerController : MonoBehaviour
                         deliveryTarget.DeliveryCounter += inventory[deliveryTarget.DeliveryItem];
                         inventory[deliveryTarget.DeliveryItem] = 0;
                     }
+                    UpdateItemAmounts(deliveryTarget.DeliveryItem, inventory[deliveryTarget.DeliveryItem]);
                 break;
             }
             interactionTarget.DoInteraction(this);
@@ -83,8 +87,11 @@ public class PlayerController : MonoBehaviour
     // Serialized Fields
     [SerializeField] Camera camera;
     [SerializeField] float moveSpeed;
+    [SerializeField] PlayerUI playerUI;
 
     Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
+
+    // Component References
 
     private void Awake()
     {
@@ -93,6 +100,14 @@ public class PlayerController : MonoBehaviour
 
         // Initialize Input Component
         input = new PlayerInputActions();
+
+        // Initialize Inventory
+        inventory = new Dictionary<ItemType, int> {
+            {ItemType.LEAF, 0},
+            {ItemType.ROCK, 0},
+            {ItemType.FLAG, 0}
+        };
+        foreach (var item in inventory) UpdateItemAmounts(item.Key, inventory[item.Key]);
     }
 
     private void Update()
@@ -115,5 +130,15 @@ public class PlayerController : MonoBehaviour
             // Apply movement to controller
             this.GetComponent<CharacterController>().Move(relativeX + relativeY);
         }
+    }
+
+    public void DisplayText(GameObject speaker, string text)
+    {
+        
+    }
+
+    public void UpdateItemAmounts(ItemType item, int amount)
+    {
+        playerUI.SetResource(item, amount);
     }
 }
