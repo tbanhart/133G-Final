@@ -118,6 +118,8 @@ MonoBehaviour:
   rockPanel: {fileID: 5932348037551732800}
   leafPanel: {fileID: 3221749064757541122}
   flagPanel: {fileID: 6543765769909255876}
+  SpeechPanelObject: {fileID: 6182107812144284164, guid: 0ddb2869271352d4bac5279a69b2386a, type: 3}
+  DialogueDisplayTime: 0
 --- !u!1 &631179435420627477
 GameObject:
   m_ObjectHideFlags: 0

@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
     public void DisplayText(GameObject speaker, string text)
     {
-        
+        playerUI.DisplayDialogue(text, speaker);
     }
 
     public void UpdateItemAmounts(ItemType item, int amount)
