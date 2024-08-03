@@ -21,8 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: m_Beige_b
-  m_Shader: {fileID: -6465566751694194690, guid: 7341258a6ea29f14ab94429e5d3f21aa, type: 3}
-  m_Parent: {fileID: -876546973899608171, guid: 7341258a6ea29f14ab94429e5d3f21aa, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 787e1ee35f5d18a439e145faf573a1c7, type: 3}
+  m_Parent: {fileID: 2100000, guid: 8642f485f7d17304491c905ba9b84b78, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -43,6 +43,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
+    - _QueueControl: 0
     m_Colors:
     - _Color: {r: 0.9803922, g: 0.9294118, b: 0.80392164, a: 1}
   m_BuildTextureStacks: []
