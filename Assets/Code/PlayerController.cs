@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -87,7 +88,10 @@ public class PlayerController : MonoBehaviour
     // Serialized Fields
     [SerializeField] Camera camera;
     [SerializeField] float moveSpeed;
+    [SerializeField] float rotationSpeed;
     [SerializeField] PlayerUI playerUI;
+    [SerializeField] GameObject playerModel;
+    Vector3 moveDirection = Vector3.zero;
 
     Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
 
@@ -113,8 +117,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Apply movement vector
-        var v2 = move.ReadValue<Vector2>() * moveSpeed * Time.deltaTime;
-        if (v2 != Vector2.zero) {
+        var v2Input = move.ReadValue<Vector2>();
+        var v2Move = v2Input;
+        if (v2Move != Vector2.zero) {
             // Normalize vectors
             var forward = camera.transform.forward;
             var right = camera.transform.right;
@@ -124,12 +129,16 @@ public class PlayerController : MonoBehaviour
             right = right.normalized;
 
             // Make input relative to camera
-            var relativeX = v2.x * right;
-            var relativeY = v2.y * forward;
+            var relativeX = v2Move.x * right;
+            var relativeY = v2Move.y * forward;
+            moveDirection = relativeX + relativeY;
 
             // Apply movement to controller
-            this.GetComponent<CharacterController>().Move(relativeX + relativeY);
+            this.GetComponent<CharacterController>().Move(moveDirection * moveSpeed * Time.deltaTime);
         }
+        // Lerp player rotation
+        playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed * Time.deltaTime);
+
     }
 
     public void DisplayText(GameObject speaker, string text)
