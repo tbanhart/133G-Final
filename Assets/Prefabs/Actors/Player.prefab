@@ -115,11 +115,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b288bdc26a48de45a6a7db080704b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
   rockPanel: {fileID: 5932348037551732800}
   leafPanel: {fileID: 3221749064757541122}
   flagPanel: {fileID: 6543765769909255876}
   SpeechPanelObject: {fileID: 6182107812144284164, guid: 0ddb2869271352d4bac5279a69b2386a, type: 3}
   DialogueDisplayTime: 0
+  DialogueBoxes: []
 --- !u!1 &631179435420627477
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: 0}
+  m_Actions: {fileID: -944628639613478452, guid: 0064830b807cc4e43b8f77f33a744b7c, type: 3}
   m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -500,7 +502,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 7890176704654766002}
   moveSpeed: 6
+  rotationSpeed: 6
   playerUI: {fileID: 8916252149346790421}
+  playerModel: {fileID: 856336965106710820}
 --- !u!1 &5778266827129465646
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,6 +516,7 @@ GameObject:
   - component: {fileID: 1231013500736999899}
   - component: {fileID: 7890176704654766002}
   - component: {fileID: 769999585847763788}
+  - component: {fileID: 5554305028940817563}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -593,6 +598,50 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5778266827129465646}
   m_Enabled: 1
+--- !u!114 &5554305028940817563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5778266827129465646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1001 &514316626241619061
 PrefabInstance:
   m_ObjectHideFlags: 0
