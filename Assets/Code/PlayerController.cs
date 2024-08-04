@@ -44,9 +44,12 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            if (hit.collider == null || hit.collider.gameObject.GetComponent<Interactable>() == null) return;
+            if (hit.collider == null) return;
+            if (hit.collider.gameObject.GetComponent<Interactable>() == null
+                 && hit.collider.transform.parent == null) return;
 
             var interactionTarget = hit.collider.gameObject.GetComponent<Interactable>();
+            if(interactionTarget == null) interactionTarget = hit.collider.transform.parent.GetComponent<Interactable>();
             switch (interactionTarget.interactableType) 
             {
                 case InteractableType.PICKUP:
@@ -54,7 +57,6 @@ public class PlayerController : MonoBehaviour
                     if (inventory.ContainsKey(item)) inventory[item]++;
                     else inventory.Add(item, 1);
                     UpdateItemAmounts(item, inventory[item]);
-                    Debug.Log(item + inventory[item]);
                 break;
 
                 case InteractableType.TALK:
