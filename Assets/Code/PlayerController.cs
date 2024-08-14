@@ -49,8 +49,25 @@ public class PlayerController : MonoBehaviour
             if (hit.collider.gameObject.GetComponent<Interactable>() == null
                  && hit.collider.transform.parent == null) return;
 
+            var hitTarget = hit.collider.gameObject;
             var interactionTarget = hit.collider.gameObject.GetComponent<Interactable>();
-            if(interactionTarget == null) interactionTarget = hit.collider.transform.parent.GetComponent<Interactable>();
+            
+            var counter = 0;
+            while (counter < 4 && interactionTarget == null)
+            {
+                Debug.Log("Object " + hitTarget.name + " didn't have interactable. Looking into next.");
+                hitTarget = hitTarget.transform.parent.gameObject;
+                try
+                {
+                    interactionTarget = hitTarget.GetComponent<Interactable>();
+                }
+                catch 
+                {
+                }
+                counter++;
+            }
+            // This may cause issues if there are things after interactions
+            if (counter == 4) return;
             switch (interactionTarget.interactableType) 
             {
                 case InteractableType.PICKUP:
@@ -97,6 +114,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject playerModel;
     Vector3 moveDirection = Vector3.zero;
     Animator animator;
+    CharacterController controller;
     public string CurrentScene;
     public bool FreezeObject = false;
 
@@ -114,6 +132,7 @@ public class PlayerController : MonoBehaviour
         // Initialize Components
         input = new PlayerInputActions();
         animator = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>();
 
         // Initialize Inventory
         inventory = new Dictionary<ItemType, int> {
@@ -132,7 +151,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // Apply movement vector
+        // Get move input
         var v2Input = move.ReadValue<Vector2>();
         var v2Move = v2Input;
 
@@ -144,7 +163,9 @@ public class PlayerController : MonoBehaviour
         float speed = new Vector2(xInput, zInput).sqrMagnitude;
         Debug.Log(speed);
         animator.SetFloat("InputMagnitude", speed, 0.3f, Time.deltaTime * 2f);
+        Vector3 moveFinal = new Vector3();
 
+        // Apply Movement
         if (v2Move != Vector2.zero) {
             // Normalize vectors
             var forward = camera.transform.forward;
@@ -159,9 +180,18 @@ public class PlayerController : MonoBehaviour
             var relativeY = v2Move.y * forward;
             moveDirection = relativeX + relativeY;
 
-            // Apply movement to controller
-            this.GetComponent<CharacterController>().Move(moveDirection * moveSpeed * Time.deltaTime);
+            moveFinal += moveDirection * moveSpeed;
+
+
+
+            
         }
+        // Apply gravity
+        if(!controller.isGrounded) { moveFinal.y += Physics.gravity.y; }
+
+        // Apply movement to controller
+        controller.Move(moveFinal * Time.deltaTime);
+
         // Lerp player rotation
         playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed);
     }
