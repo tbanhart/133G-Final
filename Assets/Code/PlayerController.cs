@@ -72,9 +72,9 @@ public class PlayerController : MonoBehaviour
             {
                 case InteractableType.PICKUP:
                     var item = interactionTarget.GetComponent<Pickup>().Item;
-                    if (inventory.ContainsKey(item)) inventory[item]++;
-                    else inventory.Add(item, 1);
-                    UpdateItemAmounts(item, inventory[item]);
+                    if (Inventory.ContainsKey(item)) Inventory[item]++;
+                    else Inventory.Add(item, 1);
+                    UpdateItemAmounts(item, Inventory[item]);
                 break;
 
                 case InteractableType.TALK:
@@ -84,13 +84,13 @@ public class PlayerController : MonoBehaviour
 
                 case InteractableType.DELIVER:
                     var deliveryTarget = interactionTarget.GetComponent<DeliveryTarget>();
-                    if (inventory.ContainsKey(deliveryTarget.DeliveryItem))
+                    if (Inventory.ContainsKey(deliveryTarget.DeliveryItem))
                     {
-                        deliveryTarget.DeliveryCounter += inventory[deliveryTarget.DeliveryItem];
-                        inventory[deliveryTarget.DeliveryItem] = 0;
+                        deliveryTarget.DeliveryCounter += Inventory[deliveryTarget.DeliveryItem];
+                        Inventory[deliveryTarget.DeliveryItem] = 0;
                         deliveryTarget.DoDelivery();
                     }
-                    UpdateItemAmounts(deliveryTarget.DeliveryItem, inventory[deliveryTarget.DeliveryItem]);
+                    UpdateItemAmounts(deliveryTarget.DeliveryItem, Inventory[deliveryTarget.DeliveryItem]);
                 break;
             }
             interactionTarget.DoInteraction(this);
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
     public string CurrentScene;
     public bool FreezeObject = false;
 
-    Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
+    public Dictionary<ItemType, int> Inventory = new Dictionary<ItemType, int>();
 
     // Component References
 
@@ -135,11 +135,13 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
 
         // Initialize Inventory
-        inventory = new Dictionary<ItemType, int> {
+        /*
+        Inventory = new Dictionary<ItemType, int> {
             {ItemType.LEAF, 0},
             {ItemType.ROCK, 0},
             {ItemType.FLAG, 0}
         };
+        */
         //foreach (var item in inventory) UpdateItemAmounts(item.Key, inventory[item.Key]);
     }
 
@@ -181,10 +183,6 @@ public class PlayerController : MonoBehaviour
             moveDirection = relativeX + relativeY;
 
             moveFinal += moveDirection * moveSpeed;
-
-
-
-            
         }
         // Apply gravity
         if(!controller.isGrounded) { moveFinal.y += Physics.gravity.y; }
