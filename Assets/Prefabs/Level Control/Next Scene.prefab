@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9198115777896890161}
   - component: {fileID: 5759205896293622901}
   - component: {fileID: 661452717074700702}
+  - component: {fileID: 222604684011346853}
   m_Layer: 0
   m_Name: Next Scene
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.21, y: 0.15, z: 22.61}
-  m_LocalScale: {x: 2.5291, y: 2.5291, z: 2.5291}
+  m_LocalScale: {x: 0.5172262, y: 0.5172262, z: 0.5172262}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,3 +106,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &222604684011346853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664995845429985780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9add95c0045c8f42ad2653b1ce5f546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScene: Area_Woods
+  playerStartPos: {fileID: 0}
+  transitionScene: {fileID: 6517795257993796759, guid: b723ac00c24cb60429288cbe233fe023, type: 3}

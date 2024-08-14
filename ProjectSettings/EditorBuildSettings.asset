@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Area_Backyard.unity
     guid: a575511d9330494458defd489e2e29b7
+  - enabled: 1
+    path: Assets/Scenes/Area_Woods.unity
+    guid: 6e852f3457720bb44b69ec28422fae75
   m_configObjects: {}
