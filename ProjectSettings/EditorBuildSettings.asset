@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Area_Backyard.unity
     guid: a575511d9330494458defd489e2e29b7
+  - enabled: 1
+    path: Assets/Scenes/Area_Woods.unity
+    guid: 6e852f3457720bb44b69ec28422fae75
+  - enabled: 1
+    path: Assets/Scenes/TitleScene.unity
+    guid: b9334226f891d29458282e3856378cd7
+  - enabled: 1
+    path: Assets/Scenes/Area_Summit.unity
+    guid: 06e72618bd400484c96b8b6f7b9fc63f
+  - enabled: 1
+    path: Assets/Scenes/Area_Hideout.unity
+    guid: 925f9d36ffb919644a32112ddc7cd3e3
   m_configObjects: {}

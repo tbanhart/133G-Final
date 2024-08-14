@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -44,9 +45,12 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            if (hit.collider == null || hit.collider.gameObject.GetComponent<Interactable>() == null) return;
+            if (hit.collider == null) return;
+            if (hit.collider.gameObject.GetComponent<Interactable>() == null
+                 && hit.collider.transform.parent == null) return;
 
             var interactionTarget = hit.collider.gameObject.GetComponent<Interactable>();
+            if(interactionTarget == null) interactionTarget = hit.collider.transform.parent.GetComponent<Interactable>();
             switch (interactionTarget.interactableType) 
             {
                 case InteractableType.PICKUP:
@@ -54,7 +58,6 @@ public class PlayerController : MonoBehaviour
                     if (inventory.ContainsKey(item)) inventory[item]++;
                     else inventory.Add(item, 1);
                     UpdateItemAmounts(item, inventory[item]);
-                    Debug.Log(item + inventory[item]);
                 break;
 
                 case InteractableType.TALK:
@@ -68,6 +71,7 @@ public class PlayerController : MonoBehaviour
                     {
                         deliveryTarget.DeliveryCounter += inventory[deliveryTarget.DeliveryItem];
                         inventory[deliveryTarget.DeliveryItem] = 0;
+                        deliveryTarget.DoDelivery();
                     }
                     UpdateItemAmounts(deliveryTarget.DeliveryItem, inventory[deliveryTarget.DeliveryItem]);
                 break;
@@ -92,6 +96,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerUI playerUI;
     [SerializeField] GameObject playerModel;
     Vector3 moveDirection = Vector3.zero;
+    Animator animator;
+    public string CurrentScene;
+    public bool FreezeObject = false;
 
     Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
 
@@ -99,11 +106,14 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        // Move to scene Start
-        transform.position = GameObject.Find("Scene Start").transform.position;
+        //DontDestroyOnLoad(this);
 
-        // Initialize Input Component
+        // Move to scene Start
+        //transform.position = GameObject.Find("Scene Start").transform.position;
+
+        // Initialize Components
         input = new PlayerInputActions();
+        animator = GetComponent<Animator>();
 
         // Initialize Inventory
         inventory = new Dictionary<ItemType, int> {
@@ -111,14 +121,30 @@ public class PlayerController : MonoBehaviour
             {ItemType.ROCK, 0},
             {ItemType.FLAG, 0}
         };
-        foreach (var item in inventory) UpdateItemAmounts(item.Key, inventory[item.Key]);
+        //foreach (var item in inventory) UpdateItemAmounts(item.Key, inventory[item.Key]);
     }
 
     private void Update()
     {
+        if(FreezeObject == true)
+        {
+            FreezeObject = false;
+            return;
+        }
+
         // Apply movement vector
         var v2Input = move.ReadValue<Vector2>();
         var v2Move = v2Input;
+
+        // Animation Update
+        float xInput = v2Input.x;
+        float zInput = v2Input.y;
+        animator.SetFloat("InputZ", zInput, 0.3f, Time.deltaTime * 2f);
+        animator.SetFloat("InputX", xInput, 0.3f, Time.deltaTime * 2f);
+        float speed = new Vector2(xInput, zInput).sqrMagnitude;
+        Debug.Log(speed);
+        animator.SetFloat("InputMagnitude", speed, 0.3f, Time.deltaTime * 2f);
+
         if (v2Move != Vector2.zero) {
             // Normalize vectors
             var forward = camera.transform.forward;
@@ -137,8 +163,7 @@ public class PlayerController : MonoBehaviour
             this.GetComponent<CharacterController>().Move(moveDirection * moveSpeed * Time.deltaTime);
         }
         // Lerp player rotation
-        playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed * Time.deltaTime);
-
+        playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed);
     }
 
     public void DisplayText(GameObject speaker, string text)

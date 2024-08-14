@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 111273935577124018}
   - component: {fileID: 634541476347052943}
   - component: {fileID: 4459863855868472892}
-  - component: {fileID: 6080360984786326471}
+  - component: {fileID: 3045400509258886371}
   m_Layer: 0
   m_Name: Leaf Crate
   m_TagString: Untagged
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableType: 2
---- !u!114 &6080360984786326471
+--- !u!114 &3045400509258886371
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,8 +129,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5387786286377714818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 699173c69c1370f42843f16376365253, type: 3}
+  m_Script: {fileID: 11500000, guid: 49988f8b04d744542b6afe85272ecbd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DeliveryItem: 0
   DeliveryCounter: 0
+  barrier: {fileID: 0}
+  requiredLeaves: 3
