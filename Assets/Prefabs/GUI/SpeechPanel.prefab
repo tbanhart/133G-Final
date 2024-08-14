@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &644819028443191813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -180,7 +180,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1.235, y: 359}
-  m_SizeDelta: {x: 788.47, y: 367.99}
+  m_SizeDelta: {x: 788.47, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5691357368108819560
 CanvasRenderer:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6182107812144284164}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -292,3 +292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224c689cef6a9a14194c0357eba271d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speaker: {fileID: 0}
+  Timer: 0
+  text: {fileID: 3764786156280202623}

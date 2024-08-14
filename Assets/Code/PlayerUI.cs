@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
+using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -56,7 +57,7 @@ public class PlayerUI : MonoBehaviour
 
             dispComp.position = targetPos;
         }
-        foreach(var item in deleteList)
+        foreach (var item in deleteList)
         {
             DialogueBoxes.Remove(item);
             Speakers.Remove(item);
@@ -76,8 +77,11 @@ public class PlayerUI : MonoBehaviour
         var obj = Instantiate(SpeechPanelObject);
         DialogueBoxes.Add(obj);
         Speakers.Add(obj, speaker);
+        obj.GetComponent<SpeechWindow>().Text = message;
         obj.GetComponent<SpeechWindow>().Speaker = speaker;
         obj.GetComponent<SpeechWindow>().Timer = (int)(DialogueDisplayTime / Time.deltaTime);
+        obj.GetComponent<SpeechWindow>().SetVisible();
+
         obj.transform.SetParent(this.transform);
     }
 }
