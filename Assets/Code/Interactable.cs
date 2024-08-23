@@ -15,7 +15,7 @@ public class Interactable : MonoBehaviour
             break;
 
             case InteractableType.TALK:
-                Debug.Log(this.GetComponent<NPC>().DialogueText);    
+                //Debug.Log(this.GetComponent<NPC>().DialogueText);    
             break;
 
             case InteractableType.DELIVER:

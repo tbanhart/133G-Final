@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
             var counter = 0;
             while (counter < 4 && interactionTarget == null)
             {
-                Debug.Log("Object " + hitTarget.name + " didn't have interactable. Looking into next.");
+                //Debug.Log("Object " + hitTarget.name + " didn't have interactable. Looking into next.");
                 hitTarget = hitTarget.transform.parent.gameObject;
                 try
                 {
@@ -163,7 +163,6 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("InputZ", zInput, 0.3f, Time.deltaTime * 2f);
         animator.SetFloat("InputX", xInput, 0.3f, Time.deltaTime * 2f);
         float speed = new Vector2(xInput, zInput).sqrMagnitude;
-        Debug.Log(speed);
         animator.SetFloat("InputMagnitude", speed, 0.3f, Time.deltaTime * 2f);
         Vector3 moveFinal = new Vector3();
 
@@ -183,6 +182,15 @@ public class PlayerController : MonoBehaviour
             moveDirection = relativeX + relativeY;
 
             moveFinal += moveDirection * moveSpeed;
+            if (moveFinal != Vector3.zero)
+            {
+                if(GetComponent<AudioSource>().isPlaying == false)
+                    GetComponent<AudioSource>().Play();
+            }
+            else
+            {
+                GetComponent<AudioSource>().Stop();
+            }
         }
         // Apply gravity
         if(!controller.isGrounded) { moveFinal.y += Physics.gravity.y; }

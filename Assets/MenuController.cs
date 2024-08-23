@@ -14,6 +14,7 @@ public class MenuController : MonoBehaviour
 
         obj.GetComponent<SceneTransition>().NewScene = targetScene;
         obj.name = "Scene Transition";
+        DontDestroyOnLoad(obj);
 
         SceneManager.LoadScene("Area_Backyard");
     }
