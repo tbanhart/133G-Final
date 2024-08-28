@@ -43,31 +43,34 @@ public class PlayerController : MonoBehaviour
         var v2 = (mouse.ReadValue<Vector2>());
         var ray = camera.ScreenPointToRay(mouse.ReadValue<Vector2>());
         RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 0))
         {
             if (hit.collider == null) return;
             if (hit.collider.gameObject.GetComponent<Interactable>() == null
                  && hit.collider.transform.parent == null) return;
 
             var hitTarget = hit.collider.gameObject;
-            var interactionTarget = hit.collider.gameObject.GetComponent<Interactable>();
+            var interactionTarget = hitTarget.GetComponent<Interactable>();
             
             var counter = 0;
             while (counter < 4 && interactionTarget == null)
             {
-                //Debug.Log("Object " + hitTarget.name + " didn't have interactable. Looking into next.");
-                hitTarget = hitTarget.transform.parent.gameObject;
-                try
+                
+                if (hitTarget.transform.parent == null)
                 {
                     interactionTarget = hitTarget.GetComponent<Interactable>();
+                    break;
                 }
-                catch 
-                {
-                }
+                
+
+                Debug.Log("Object " + hitTarget.name + " didn't have interactable. Looking into next.");
+                
+                hitTarget = hitTarget.transform.parent.gameObject;
+                interactionTarget = hitTarget.GetComponent<Interactable>();
                 counter++;
             }
             // This may cause issues if there are things after interactions
-            if (counter == 4) return;
+            if (interactionTarget == null) { Debug.Log("No interactable in " + hitTarget); return; }
             switch (interactionTarget.interactableType) 
             {
                 case InteractableType.PICKUP:
