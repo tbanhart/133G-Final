@@ -5856,6 +5856,10 @@ PrefabInstance:
       value: Deilvery Target - Stepping Stones
       objectReference: {fileID: 0}
     - target: {fileID: 3588877360337689085, guid: 1393502af5002d94aaf75510b59fe0de, type: 3}
+      propertyPath: bridgeLocation
+      value: 
+      objectReference: {fileID: 1775871653}
+    - target: {fileID: 3588877360337689085, guid: 1393502af5002d94aaf75510b59fe0de, type: 3}
       propertyPath: creekBoundries
       value: 
       objectReference: {fileID: 566346469}
