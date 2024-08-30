@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8232148124929030533}
   - component: {fileID: 8692522530290572920}
   - component: {fileID: 3822334822417594545}
+  - component: {fileID: -4995834613012956529}
   m_Layer: 0
   m_Name: Flag Spot
   m_TagString: Untagged
@@ -122,3 +123,16 @@ MonoBehaviour:
   DeliveryItem: 2
   DeliveryCounter: 0
   flagPrefab: {fileID: 1683129383060220257, guid: ec44cdd8cb3b5094dae67aab4aee5b39, type: 3}
+--- !u!114 &-4995834613012956529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7012076457843589609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c89832227c9ec048b3f3feb7a7c8007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableType: 2

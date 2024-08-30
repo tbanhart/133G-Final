@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5392139679452003540}
   - component: {fileID: 3588877360337689085}
+  - component: {fileID: 4388448089525454528}
   m_Layer: 0
   m_Name: Deilvery Target - Stepping Stones
   m_TagString: Untagged
@@ -52,6 +53,19 @@ MonoBehaviour:
   bridgeLocation: {fileID: 0}
   creekBoundries: {fileID: 0}
   rockPile: {fileID: 7541698802600233907}
+--- !u!114 &4388448089525454528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452279227490156697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c89832227c9ec048b3f3feb7a7c8007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableType: 2
 --- !u!1 &7541698802600233907
 GameObject:
   m_ObjectHideFlags: 0
